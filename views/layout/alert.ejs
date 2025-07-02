@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmbaCashier</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-material-ui/material-ui.css"> 
+    <script>
+        // Common alert functions
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            timer: 1200,
+            showConfirmButton: false,
+            timerProgressBar: true
+        });
+
+        function errorMessage(message) {
+            Toast.fire({
+                icon: 'error',
+                title: message
+            });
+        }
+
+        function succesMessages(message) {
+            Toast.fire({
+                icon: 'success',
+                title: message
+            });
+        }
+
+        function confirmMessage(title, text) {
+            return Swal.fire({
+                title: title,
+                text: text,
+                icon: 'warning',
+                showCancelButton: true,
+            });
+        }
+    </script>
+</head>
+<body class="<%= typeof bodyClass !== 'undefined' ? bodyClass : '' %>"> 
