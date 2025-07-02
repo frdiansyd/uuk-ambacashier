@@ -1,0 +1,448 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&display=swap');
+
+    body{
+        zoom:100%
+    }
+
+* {
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.divider{
+    height: 1px;
+    background-color: #D5CEA3;
+    margin: 4px 0;
+}
+
+.login-wrapper, .register-wrapper, .edit-produk-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+input {
+    width: 100%;
+    height: 50px;
+    padding: 8px;
+    margin:8px 0;
+    border: 2px solid #1A120B;
+    border-radius: 4px;
+}
+
+.register-container, .login-container, .tambah-produk-container, .edit-produk-container{
+    width: 1000px;
+    padding: 20px;
+    border-radius: 7px;
+    background: white;
+}
+
+.login-container a {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
+}
+
+.daftar-produk-wrapper {
+    height: 100vh;
+    background: #F6F0F0;
+    padding-left: 300px;
+    padding-top: 20px;
+}
+
+.container {
+    margin-top: 35px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    z-index: 500;
+    justify-content: flex-start;
+}
+
+/* SweetAlert*/
+.swal-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:rgb(18, 229, 15);
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.swal-button:hover {
+  background-color: #3a2a1b;
+}
+
+
+.swal2-confirm {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  background-color: #1A120B !important;
+  color: white !important;
+  border-radius: 5px !important;
+  padding: 10px 20px !important;
+  font-weight: 600 !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s ease !important;
+}
+.swal2-confirm:hover {
+  background-color: #3a2a1b !important;
+}
+
+.swal2-cancel {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  background-color: #e61e3c !important;
+  color: white !important;
+  border-radius: 5px !important;
+  padding: 10px 20px !important;
+  font-weight: 600 !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s ease !important;
+}
+.swal2-cancel:hover {
+  background-color: #e61e3c !important;
+}
+
+.card-item {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+    background: #fff;
+    border: 2px solid #1A120B;
+    border-radius: 5px;
+    width: 280px;
+    padding: 15px;
+}
+
+.card-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.card-item-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    gap: 5px;
+}
+
+.logout-form {
+    margin-top: auto;
+    padding: 10px;
+}
+
+.tambah-produk-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding-left: 260px;
+}
+
+/* Style untuk dropdown kategori */
+select#kategori {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 2x solid #1A120B;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Style untuk tampilan kategori di daftar produk */
+    .card-item-info p strong {
+        color: #1A120B;
+        font-weight: 600;
+    }
+
+    /* Badge kategori */
+    .kategori-badge {
+        display: inline-block;
+        border-radius: 12px;
+        font-weight: 500;
+    }
+
+/* Hover effect untuk dropdown options */
+select#kategori option {
+    padding: 10px;
+    background-color: white;
+    color: #1A120B;
+}
+
+select#kategori option:hover {
+    background-color:  #f4f4f4;
+;
+    color: #1A120B;
+}
+
+/* Style untuk container form */
+.tambah-produk-container,
+.edit-produk-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+}
+
+/* Style untuk label */
+label {
+    color: #1A120B;
+    font-weight: 500;
+    display: block;
+}
+
+/* Style untuk input dan textarea */
+input[type="text"],input[type="number"],textarea {
+    height: 50px;
+    width: 100%;
+    padding: 0 15px;
+    font-size: 14px;
+    border: 2px solid #D5CEA3;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: all 0.25s ease;
+}
+
+/* Style untuk button */
+button[type="submit"] {
+    background-color: #1A120B;
+    color: #E5E5CB;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #1A120B;
+}
+
+/* Style untuk file input */
+input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    cursor: pointer;
+}
+
+input[type="file"]:hover {
+    border-color: #1A120B;
+}
+/* Style untuk tabel penjualan */
+
+.penjualan-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+}
+
+.penjualan-table th,
+.penjualan-table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.penjualan-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #1A120B;
+}
+
+.penjualan-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.wrapper-daftar-penjualan {
+    min-height: 100vh;
+    background-color: #F6F0F0;
+    padding: 20px;
+    padding-left: 270px;
+}
+
+.content-container {
+    padding: 20px;
+}
+
+.content-container h1 {
+    color: #1A120B;
+    margin-bottom: 20px;
+}
+
+/* Style untuk keranjang */
+.keranjang-wrapper {
+    min-height: 100vh;
+    background: #F6F0F0;
+    padding: 20px;
+    padding-left: 325px;
+    border-radius: 5px;
+}
+
+.keranjang-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    background: white;
+        border-radius:5px;
+}
+
+.keranjang-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 2px solid #1A120B;
+
+}
+
+.keranjang-table th{
+    padding: 12px 15px;
+    text-align: left;
+    border: 2px solid #1A120B;
+    
+}
+
+.keranjang-table .main-format {
+    background-color: #1A120B;
+    font-weight: 600;
+    color: #F6F0F0;
+    border: 2px solid #F6F0F0;
+}
+
+.jumlah-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-red {
+    border: none;
+    padding: 8px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    background-color: #e61e3c;
+    color: white;
+}
+
+.checkout-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.btn-green {
+    background-color: #1ca928;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Style untuk struk */
+        .struk-detail-container {
+            max-width: 800px;
+            margin: 32px auto;
+            padding: 30px 30px;
+            background: #F6F0F0;
+            border-radius: 5px;
+        }
+
+
+        .struk-detail-details {
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+
+.struk-detail-header {
+    text-align: center;
+    padding-bottom: 16px;
+}
+
+        .struk-detail-footer {
+            text-align: center;
+            margin-top: 32px;
+            padding-top: 16px;
+        }
+
+        .struk-detail-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+.items-list {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    padding: 0 14px;
+}
+
+.items-list h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 40px;
+}
+
+.button-brown {
+    display: block;
+    height: 50px;
+    padding: 8px;
+    margin-top: 10px;
+    background-color: #1a0b0b;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.detail-row span {
+    font-family: 'David Libre', serif;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #1A120B;
+}
+
+.store-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-top: 30px;
+}
