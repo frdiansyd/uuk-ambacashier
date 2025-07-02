@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Autentikasi</title>
+    <!---Custom CSS File--->
+    <style>
+        /* Import Google font - Poppins */
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&display=swap');
+
+        /* font-family: 'Poppins', sans-serif;
+        font-family: 'David Libre', serif; */
+
+        .imgay {
+            font-family: 'David Libre', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            width: 100%;
+            background: #1A120B;
+        }
+
+        .button {
+            font-family: 'David Libre', serif;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 430px;
+            width: 100%;
+            background: #fff;
+            border-radius: 5px;
+        }
+
+        .container .registration {
+            display: none;
+        }
+
+        #check:checked~.registration {
+            display: block;
+        }
+
+        #check:checked~.login {
+            display: none;
+        }
+
+        #check {
+            display: none;
+        }
+
+        .container .form {
+            padding: 2rem;
+        }
+
+
+        .form header {
+            font-size: 2rem;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 1.5rem;
+
+        }
+
+        .form input {
+            height: 60px;
+            width: 100%;
+            padding: 0 15px;
+            font-size: 14px;
+            border: 2px solid #D5CEA3;
+            border-radius: 5px;
+            outline: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .form input:focus {
+            border: 2px solid #1A120B;
+        }
+
+        .form a {
+            font-size: 16px;
+            color: #1A120B;
+            text-decoration: none;
+        }
+
+        .form a:hover {
+            text-decoration: underline;
+        }
+
+        .form input.button {
+            color: #E5E5CB;
+            background: #1A120B;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-top: 1.7rem;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        .form input.button:hover {
+            background: #1A120B;
+        }
+
+        .signup {
+            font-size: 17px;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .signup label {
+            color: #1A120B;
+            cursor: pointer;
+        }
+
+        .signup label:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="checkbox" id="check">
+        <div class="login form">
+            <%- include('layout/alert', { title: 'Login' , bodyClass: 'login-wrapper' }) %>
+                <h2 class="imgay">Login</h2>
+                <form action="#" method="POST" action="/auth/login" id="loginForm">
+                    <label for="username" style="display: none;">Username</label>
+                    <input type="text" id="username" name="username" placeholder=" Username" required>
+                    <label for="password" style="display: none;">Password</label>
+                    <input type="password" id="password" name="password" placeholder=" Password" required>
+                    <input type="submit" class="button" value="Login">
+                </form>
+                <div class="signup">
+                    <p>Don't have an account?</p>
+                    <label href="/auth/login" for="check" style="font-weight: 600;">Register</label>
+                </div>
+        </div>
+        <div class="registration form">
+            <%- include('layout/alert', { title: 'Register' , bodyClass: 'register-wrapper' }) %>
+                <h2 class="imgay">Register</h2>
+                <form id="registerForm" action="/auth/register" method="POST">
+                    <label for="nama" style="display: none;">Nama</label>
+                    <input type="text" id="nama" name="nama" placeholder="Nama" required>
+                    <label for="alamat" style="display: none;">Alamat</label>
+                    <input type="text" id="alamat" name="alamat" placeholder="Alamat" required>
+                    <label for="telepon" style="display: none;">Telepon</label>
+                    <input type="telepon" id="telepon" name="telepon" placeholder="Telepon" required>
+                    <label for="reg-username" style="display: none;">Username</label>
+                    <input type="text" id="reg-username" name="username" placeholder="Username" required>
+                    <label for="reg-password" style="display: none;">Password</label>
+                    <input type="password" id="reg-password" name="password" placeholder="Password" required>
+                    <input type="submit" class="button" value="Register">
+                </form>
+                <div class="signup">
+                    <p>Already have an account?</p>
+                    <label href="/auth/login" for="check" style="font-weight: 600;">Login</label>
+                </div>
+        </div>
+    </div>
+</body>
+
+</html>

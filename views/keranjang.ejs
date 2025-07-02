@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keranjang/title>
+    <style>
+        .button {
+            display: block;
+            height: 50px;
+            padding: 8px;
+            margin-top: 10px;
+            background-color: #1a0b0b;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-papbXQ+Y6Xb6+6Q6X+6Q6X+6Q6X+6Q6X+6Q6X+6Q6X+6Q6X+6Q6X+6Q6X+6Q6X+6Q6X+6Q6X+6Q=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    />
+</head>
+
+<body class="keranjang-wrapper">
+    <%- include('layout/alert', { title: 'Keranjang Belanja' , bodyClass: 'keranjang-wrapper' }) %>
+        <%- include('layout/sidebar') %>
+            <div class="content-container">
+                <div style="display: flex;"></div>
+                <h1 style="font-family: 'David Libre', serif; font-size: 38px; font-weight: 400;">Keranjang Belanja</h1>
+                <div class="checkout-container">
+                    <button onclick="checkout()" class="btn-green">Checkout</button>
+                </div>
+
+                <table class="penjualan-table">
+                    <thead>
+                        <tr class="main-format">
+                            <th>No</th>
+                            <th>Gambar</th>
+                            <th>Nama Produk</th>
+                            <th>Harga</th>
+                            <th>Jumlah</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% items.forEach((item, index)=> { %>
+                            <tr>
+                                <td><%= index + 1 %></td>
+                                <td><img src="/image/<%= item.produk_id.foto %>" alt="<%= item.produk_id.namaProduk %>"style="width: 100px; height: auto;" /></td>
+                                <td><%= item.produk_id.namaProduk %></td>
+                                <td>Rp <%= item.produk_id.harga.toLocaleString() %></td>
+                                <td>
+                                    <div class="jumlah-control"><input type="number" min="1"
+                                            max="<%= item.produk_id.stok %>" value="<%= item.jumlah %>"
+                                            onchange="updateJumlah('<%= item._id %>', this.value)"
+                                            style="width: 100px; text-align: center; height: 30px; border: none" />
+                                    </div>
+                                </td>
+                                <td>Rp <%= (item.produk_id.harga * item.jumlah).toLocaleString() %></td>
+                                <td><button onclick="hapusItem('<%= item._id %>')" class="btn-red"><i class="fa fa-trash"></i></button></td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="6" class="text-right"><strong>Total :</strong></td>
+                            <td colspan="1"><strong>Rp <%= totalHarga.toLocaleString() %></strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <script>
+                async function hapusItem(itemId) {
+                    const result = await confirmMessage('Hapus Item?',);
+
+                    if (result.isConfirmed) {
+                        try {
+                            const response = await fetch(`/keranjang/delete/${itemId}`, {
+                                method: 'DELETE',
+                            });
+                        } catch (error) {
+                            console.error('Error:', error);
+                            errorMessage('Terjadi kesalahan saat menghapus item');
+                        }
+                    }
+                }
+
+                async function checkout() {
+                    const result = await confirmMessage('Checkout?');
+
+                    if (result.isConfirmed) {
+                        try {
+                            const response = await fetch('/keranjang/checkout', {
+                                method: 'POST',
+                            });
+
+                            if (response.ok) {
+                                const data = await response.json();
+                                window.location.href = `/pembelianStruk/${data.orderId}`;
+                            } else {
+                                const error = await response.text();
+                                errorMessage(error);
+                            }
+                        } catch (error) {
+                            console.error('Error:', error);
+                            errorMessage('Terjadi kesalahan checout');
+                        }
+                    }
+                }
+            </script>
+</body>
+
+</html>

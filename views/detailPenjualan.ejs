@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Struk Penjualan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #1A120B;
+            color: #333;
+        }
+
+        .button {
+            text-align: center;
+            display: block;
+            height: 40px;
+            padding: 8px 24px;
+            margin-top: 10px;
+            background-color: #1a0b0b;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        span{
+            margin: 8px 0px;
+        }
+
+        strong {
+            font-family: "jakarta", sans-serif;
+            font-weight: 500;
+        }
+
+        .items-list {
+            margin-bottom: 32px;
+            padding-bottom: 48px;
+        }
+
+        .items-list h3 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 2px solid #f8f9fa;
+        }
+
+        thead th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+
+        tfoot tr {
+            font-weight: bold;
+            background: #f8f9fa;
+        }
+
+
+        @media print {
+            body {
+                background: white;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('layout/alert', { title: 'Struk Penjualan' , bodyClass: 'struk-penjualan-wrapper' }) %>
+
+        <div class="struk-detail-container">
+            <div class="struk-detail-header">
+                <div class="struk-detail-info">
+                    <h1 style="font-family: 'David Libre', serif; font-size:36px; text-align: center;font-weight: 400;">Detail Penjualan
+                    </h1>
+                </div>
+            </div>
+
+            <div class="struk-detail-details">
+                <div class="detail-row">
+                    <span>ID Penjualan</span>
+                    <strong>#<%= penjualan._id %></strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Tanggal</span>
+                    <strong><%= new Date(penjualan.tanggalPenjualan).toLocaleDateString('id-ID', { weekday: 'long' ,year: 'numeric' , month: 'long' , day: 'numeric' }) %></strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Waktu</span>
+                    <strong><%= new Date(penjualan.tanggalPenjualan).toLocaleTimeString('id-ID', { hour: '2-digit' ,minute: '2-digit' }) %></strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Pelanggan</span>
+                    <strong><%= penjualan.pelanggan_id.namaPelanggan %></strong>
+                </div>
+            </div>
+
+            <div class="items-list">
+                <div style="display: flex; justify-content: space-between;">
+                    <h3 style="font-family: 'David Libre', serif; font-size:24px; font-weight:400;">Detail Produk</h3>
+                        <div class="struk-detail-actions">
+                            <button onclick="window.print()" class="button">Export PDF</button>
+                            <a href="/penjualan/detail/<%= penjualan._id %>/export-excel" class="button">Export Excel</a>
+                            <a href="/penjualan" class="button">Kembali</a>
+                        </div>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Produk</th>
+                                <th>Harga</th>
+                                <th>Jumlah</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% penjualan.items.forEach((item, index)=> { %>
+                                <tr>
+                                    <td><%= index + 1 %></td>
+                                    <td><%= item.produk_id ? item.produk_id.namaProduk : 'Produk tidak ditemukan' %></td>
+                                    <td>Rp <%= item.harga.toLocaleString('id-ID') %></td>
+                                    <td><%= item.jumlah %></td>
+                                    <td>Rp <%= item.total.toLocaleString('id-ID') %></td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">Total</td>
+                                <td>Rp <%= penjualan.totalHarga.toLocaleString('id-ID') %>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+</body>
+
+</html>

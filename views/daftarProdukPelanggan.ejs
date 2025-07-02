@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Produk</title>
+    <link rel="stylesheet" href="/css/style.css">
+        <style>
+        .button-cart {
+            display: block;
+            height: 50px;
+            font-size: 16px;
+            padding: 8px;
+            width: 100%;
+            margin-top: 10px;
+            background-color: #1a0b0b;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body class="daftar-produk-wrapper">
+    <%- include('layout/alert', { title: 'Daftar Produk' , bodyClass: 'daftar-produk-wrapper' }) %>
+        <%- include('layout/sidebar') %>
+            <h1 style="font-family: 'David Libre', serif; font-size:38px; font-weight:400;">Daftar Barang</h1>
+            <div class="container">
+                <% produkList.forEach(produk=> { %>
+                    <div class="card-item">
+                        <img src="/image/<%= produk.foto %>" style="width:242px ; height :242px ;object-fit: cover; ">
+                        <div class="card-item-info">
+                            <p style="font-family: 'David Libre', serif; font-size:32px ; margin:6px 0px;"><%= produk.namaProduk %></p>
+                            <p style="display: flex; justify-content: space-between;"><strong>Kategori :</strong><span class="kategori-badge kategori-<%= produk.kategori %>"><%= produk.kategori %></span></p>
+                            <p style="display: flex; justify-content: space-between;"><strong>Stok :</strong><%= produk.stok %></p>
+                            <div class="divider"></div>
+                                <p style="font-weight: 800;font-size: 24px;display: flex;justify-content:start;">Rp <%= produk.harga.toLocaleString() %></p>
+                            <p style="opacity: 0.8; margin: 10px 0px;font-size: 14px;"><%= produk.deskripsi %></p>
+                        </div>
+                        <div>
+                            <button onclick="tambahKeKeranjang('<%= produk._id %>')" class="button-cart"><i class="fas fa-shopping-cart" style="margin: 0px 12px;"></i>Keranjang</button>
+                        </div>
+                    </div>
+                    <% }); %>
+            </div>
+
+            <script>
+        async function tambahKeKeranjang(produkId) {
+            try {
+                const response = await fetch(`/keranjang/add/${produkId}`, {
+                    method: 'POST'
+                });
+
+                if (response.ok) {
+                    Swal.fire({
+                        title: 'Ditambahkan ke keranjang!',
+                        icon: 'success',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '/keranjang';
+                        }
+                    });
+                } else {
+                    const error = await response.text();
+                    errorMessage(error);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage('Terjadi kesalahan saat menambahkan ke keranjang');
+            }
+        }
+    </script>
+</body>
+
+</html>

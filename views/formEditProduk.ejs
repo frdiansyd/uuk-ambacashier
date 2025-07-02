@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Produk</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            background-color: #1A120B;
+        }
+
+                .form header {
+            font-size: 2rem;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 1.5rem;
+
+        }
+
+        .form input {
+            height: 60px;
+            width: 100%;
+            padding: 0 15px;
+            font-size: 14px;
+            border: 2px solid #D5CEA3;
+            border-radius: 5px;
+            outline: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .form input:focus {
+            border: 2px solid #1A120B;
+        }
+
+        .form a {
+            font-size: 16px;
+            color: #1A120B;
+            text-decoration: none;
+        }
+
+        .form a:hover {
+            text-decoration: underline;
+        }
+
+        .form input.button {
+            color: #E5E5CB;
+            background: #1A120B;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-top: 1.7rem;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        .form input.button:hover {
+            background: #1A120B;
+        }
+
+        button,
+        .button {
+            display: block;
+            width: 100%;
+            height: 50px;
+            padding: 8px;
+            margin-top: 10px;
+            background-color: #1A120B;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        
+    </style>
+</head>
+
+<body class="edit-produk-wrapper">
+    <div class="edit-produk-container">
+        <h1 style="font-family: 'David Libre', serif; font-size:38px; font-weight:400; text-align: center;">Edit Produk
+        </h1>
+        <form action="/produk/edit/<%= produk._id %>" method="POST" enctype="multipart/form-data">
+            <input type="text" id="namaProduk" name="namaProduk" value="<%= produk.namaProduk %>" required><br>
+
+            <input type="file" id="foto" name="foto"><br>
+            <select id="kategori" name="kategori" required>
+                <option value="">Pilih Kategori</option>
+                <option value="Canvas" <%=produk.kategori==='Canvas' ? 'selected' : '' %>>Canvas</option>
+                <option value="Sneaker" <%=produk.kategori==='Sneaker' ? 'selected' : '' %>>Sneaker</option>
+            </select><br>
+            <input type="number" id="harga" name="harga" value="<%= produk.harga %>" required><br>
+            <input type="number" id="stok" name="stok" value="<%= produk.stok %>" required><br>
+            <textarea id="deskripsi" name="deskripsi" rows="4" required><%= produk.deskripsi %></textarea><br>
+
+            <button type="submit">Update</button>
+        </form>
+    </div>
+</body>
+
+</html>

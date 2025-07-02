@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StrukPembelian</title>
+        <style>
+        body {
+            background-color: #1A120B;
+            color: #333;
+        }
+
+        .button {
+            text-align: center;
+            display: block;
+            height: 40px;
+            padding: 8px 24px;
+            margin-top: 10px;
+            background-color: #1a0b0b;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        span{
+            margin: 8px 0px;
+        }
+
+        strong {
+            font-family: "jakarta", sans-serif;
+            font-weight: 500;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 2px solid #f8f9fa;
+        }
+
+        thead th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+
+        tfoot tr {
+            font-weight: bold;
+            background: #f8f9fa;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+    <%- include('layout/alert', { title: 'Bukti Pembayaran' , bodyClass: 'pembelianStruk-wrapper' }) %>
+        <div class="struk-detail-container">
+            <div class="struk-detail-header">
+                <div class="struk-detail-header">
+                    <h1 style="font-family: 'David Libre', serif; font-size:36px; font-weight:400; text-align: center;">Struk Pembayaran</h1>
+                </div>
+                <div class="struk-detail-details">
+                    <div class="detail-row">
+                        <span> No. Transaksi</span>
+                        <strong>#<%= orderId %></strong>
+                    </div>
+
+                    <div class="detail-row">
+                        <span>Tanggal</span>
+                        <strong><%= new Date().toLocaleDateString('id-ID', { weekday: 'long' , year: 'numeric' ,month: 'long' , day: 'numeric' , hour: '2-digit' , minute: '2-digit' }) %></strong>
+                    </div>
+
+                    <div class="detail-row">
+                        <span>Pelanggan</span>
+                        <strong><%= pelanggan.namaPelanggan %></strong>
+                    </div>
+                </div>
+
+                <div class="items-list">
+                    <div style="display: flex;justify-content: space-between;">
+                        <h3 style="font-family: 'David Libre', serif; font-size:28px; text-align: center;font-weight: 400;">Detail Pembelian</h3>
+                        <div class="struk-detail-actions">
+                            <button onclick="window.print()" class="button">Export PDF</button>
+                            <a href="/pembelianStruk/<%= orderId %>/export-excel" class="button">Export Excel</a>
+                            <a href="/produk/pelanggan" class="button">Kembali</a>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Produk</th>
+                                <th>Harga</th>
+                                <th>Jumlah</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% items.forEach(item=> { %>
+                                <tr>
+                                    <td><%= item.produk_id.namaProduk %></td>
+                                    <td>Rp <%= item.produk_id.harga.toLocaleString() %></td>
+                                    <td><%= item.jumlah %></td>
+                                    <td>Rp <%= (item.produk_id.harga * item.jumlah).toLocaleString() %></td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3">Total</td>
+                                <td>Rp <%= totalHarga.toLocaleString() %>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+</body>
+
+</html>
